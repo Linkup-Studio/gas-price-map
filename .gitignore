@@ -1,0 +1,15 @@
+# data pipeline
+data/s5_latest.xlsx
+
+# node / expo
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+
+# macOS
+.DS_Store
+
+# env
+.env*
