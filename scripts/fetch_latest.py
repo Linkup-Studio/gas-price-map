@@ -88,6 +88,35 @@ def try_probe() -> bool:
     return False
 
 
+def try_spn() -> bool:
+    """Wayback Machineの Save Page Now にMETIを取得させ、その場で最新版を得る。
+
+    METIはブラウザ以外のTLSクライアントを遮断するが、archive.orgのクローラは
+    到達できるため、SPN経由なら常に最新の公表ファイルが取れる。
+    """
+    try:
+        html = http_get(f"https://web.archive.org/save/{RESULTS_URL}", timeout=180).decode(
+            "utf-8", errors="ignore"
+        )
+    except Exception as e:
+        print(f"SPN results page failed: {e}", file=sys.stderr)
+        return False
+    names = sorted(set(re.findall(r"xlsx/(\d{6}s5\.xlsx)", html)))
+    if not names:
+        print("SPN: no s5 link found", file=sys.stderr)
+        return False
+    name = names[-1]
+    try:
+        data = http_get(f"https://web.archive.org/save/{BASE}/xlsx/{name}", timeout=300)
+    except Exception as e:
+        print(f"SPN xlsx failed: {e}", file=sys.stderr)
+        return False
+    if is_xlsx(data):
+        save(data, f"wayback SPN ({name})")
+        return True
+    return False
+
+
 def try_wayback() -> bool:
     cdx = (
         "http://web.archive.org/cdx/search/cdx"
@@ -118,7 +147,11 @@ def try_wayback() -> bool:
 
 
 if __name__ == "__main__":
-    strategies = (try_results_page, try_probe, try_wayback) if meti_reachable() else (try_wayback,)
+    strategies = (
+        (try_results_page, try_probe, try_spn, try_wayback)
+        if meti_reachable()
+        else (try_spn, try_wayback)
+    )
     for strategy in strategies:
         if strategy():
             sys.exit(0)
