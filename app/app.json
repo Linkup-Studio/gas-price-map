@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "ガソリン価格マップ",
+    "slug": "gas-price-map",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "gaspricemap",
+    "userInterfaceStyle": "automatic",
+    "primaryColor": "#2166ac",
+    "ios": {
+      "bundleIdentifier": "com.linkupstudio.gaspricemap",
+      "buildNumber": "1",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "お住まいの地域のガソリン価格を自動表示するために位置情報を使用します。",
+        "CFBundleAllowMixedLocalizations": true,
+        "CFBundleDevelopmentRegion": "ja"
+      }
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-location",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#2166ac",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 76
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
