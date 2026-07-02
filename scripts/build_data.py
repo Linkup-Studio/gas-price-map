@@ -144,7 +144,6 @@ def build(xlsx_path: Path) -> None:
     (DATA_DIR / "meta.json").write_text(
         json.dumps(
             {
-                "generatedAt": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                 "surveyDates": survey_dates,
                 "source": "資源エネルギー庁「石油製品小売市況調査」",
                 "sourceUrl": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/",
