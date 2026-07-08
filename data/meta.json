@@ -1,9 +1,9 @@
 {
   "surveyDates": {
-    "high_octane": "2026-06-29",
-    "regular": "2026-06-29",
-    "diesel": "2026-06-29",
-    "kerosene": "2026-06-29"
+    "high_octane": "2026-07-06",
+    "regular": "2026-07-06",
+    "diesel": "2026-07-06",
+    "kerosene": "2026-07-06"
   },
   "source": "資源エネルギー庁「石油製品小売市況調査」",
   "sourceUrl": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/"
